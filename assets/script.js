@@ -41,6 +41,8 @@ const questions = [
   let currentQuestionIndex = 0;
   let timeLeft = 60; // Initial time in seconds
   let timerInterval;
+  let quizCompleted = false;
+  let score = 0;
   
   // Function to start the quiz
   function startQuiz() {
@@ -57,9 +59,12 @@ const questions = [
   
   // Function to start the timer
   function startTimer() {
+    const timerElement = document.getElementById("timer");
+    timerElement.textContent = timeLeft;
+    
     timerInterval = setInterval(function() {
       timeLeft--;
-      document.getElementById("time-left").textContent = timeLeft;
+      timerElement.textContent = timeLeft;
       
       if (timeLeft <= 0) {
         endQuiz();
@@ -86,10 +91,20 @@ const questions = [
       
       choicesElement.appendChild(choiceButton);
     });
+    
+    if (quizCompleted) {
+      // Hide the question and choices until the user clicks the "Redo Quiz" button
+      questionElement.style.display = "none";
+      choicesElement.style.display = "none";
+    } else {
+      // Show the question and choices
+      questionElement.style.display = "block";
+      choicesElement.style.display = "block";
+    }
   }
   
   // Function to handle user's choice selection
-function handleChoiceClick(choice, answer) {
+  function handleChoiceClick(choice, answer) {
     const selectedChoiceButton = event.target;
   
     if (choice === answer) {
@@ -97,16 +112,7 @@ function handleChoiceClick(choice, answer) {
       selectedChoiceButton.style.backgroundColor = '#00FF00'; // Set background color to green
       selectedChoiceButton.style.color = '#FFFFFF'; // Set text color to white
   
-      currentQuestionIndex++;
-      if (currentQuestionIndex < questions.length) {
-        setTimeout(() => {
-          displayQuestion();
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          endQuiz();
-        }, 1000);
-      }
+      score++;
     } else {
       // Incorrect answer
       selectedChoiceButton.style.backgroundColor = '#FF0000'; // Set background color to red
@@ -118,20 +124,17 @@ function handleChoiceClick(choice, answer) {
       choices[correctIndex].style.backgroundColor = '#00FF00'; // Set background color to green
       choices[correctIndex].style.color = '#FFFFFF'; // Set text color to white
   
-      // Disable all choice buttons temporarily to prevent further selection
-      choices.forEach((button) => {
-        button.disabled = true;
-      });
-  
       timeLeft -= 10; // Subtract 10 seconds from the timer
+    }
   
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
       setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          displayQuestion();
-        } else {
-          endQuiz();
-        }
+        displayQuestion();
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        endQuiz();
       }, 1000);
     }
   }
@@ -143,14 +146,26 @@ function handleChoiceClick(choice, answer) {
     const questionElement = document.getElementById("question");
     const choicesElement = document.getElementById("choices");
     const timerElement = document.getElementById("timer");
-    const finalScoreElement = document.getElementById("final-score");
     const initialsContainer = document.getElementById("initials-container");
+    const finalScoreElement = document.getElementById("final-score");
+    const redoButton = document.getElementById("redo-button");
+    const saveButton = document.getElementById("save-button");
     
     questionElement.textContent = "";
     choicesElement.innerHTML = "";
     timerElement.textContent = "";
-    finalScoreElement.textContent = "Your final score: " + timeLeft;
+    
+    const finalScore = Math.max(0, score * timeLeft); // Calculate the final score
+    finalScoreElement.textContent = "Your final score: " + finalScore;
+    
     initialsContainer.style.display = "block";
+    redoButton.style.display = "block";
+    saveButton.style.display = "block";
+    
+    finalScoreElement.style.display = "block";
+    finalScoreElement.style.marginBottom = "10px";
+    
+    quizCompleted = true;
   }
   
   // Function to save initials and score
@@ -161,20 +176,32 @@ function handleChoiceClick(choice, answer) {
     // Save initials and score
     // Example: You can use localStorage to store the data
     
-    // Reset the quiz for a new game
-    resetQuiz();
+    // Hide the initials input and save button
+    const initialsContainer = document.getElementById("initials-container");
+    const saveButton = document.getElementById("save-button");
+    initialsContainer.style.display = "none";
+    saveButton.style.display = "none";
   }
   
   // Function to reset the quiz
   function resetQuiz() {
     currentQuestionIndex = 0;
     timeLeft = 60;
+    score = 0;
     
     const initialsInput = document.getElementById("initials-input");
     const initialsContainer = document.getElementById("initials-container");
+    const finalScoreElement = document.getElementById("final-score");
+    const redoButton = document.getElementById("redo-button");
+    const saveButton = document.getElementById("save-button");
     
     initialsInput.value = "";
     initialsContainer.style.display = "none";
+    finalScoreElement.style.display = "none";
+    redoButton.style.display = "none";
+    saveButton.style.display = "none";
+    
+    quizCompleted = false;
     
     startQuiz();
   }
@@ -187,3 +214,6 @@ function handleChoiceClick(choice, answer) {
   const saveButton = document.getElementById("save-button");
   saveButton.addEventListener("click", saveScore);
   
+  // Add event listener to the redo button
+  const redoButton = document.getElementById("redo-button");
+  redoButton.addEventListener("click", resetQuiz);
