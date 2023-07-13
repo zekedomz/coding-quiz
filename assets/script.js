@@ -78,22 +78,53 @@ const questions = [
     });
   }
   
-  // Function to handle user's choice selection
-  function handleChoiceClick(choice, answer) {
+// Function to handle user's choice selection
+function handleChoiceClick(choice, answer) {
+    const selectedChoiceButton = event.target;
+  
     if (choice === answer) {
       // Correct answer
+      selectedChoiceButton.style.backgroundColor = '#00FF00'; // Set background color to green
+      selectedChoiceButton.style.color = '#FFFFFF'; // Set text color to white
+  
       currentQuestionIndex++;
-      
       if (currentQuestionIndex < questions.length) {
-        displayQuestion();
+        setTimeout(() => {
+          displayQuestion();
+        }, 1000);
       } else {
-        endQuiz();
+        setTimeout(() => {
+          endQuiz();
+        }, 1000);
       }
     } else {
       // Incorrect answer
+      selectedChoiceButton.style.backgroundColor = '#FF0000'; // Set background color to red
+      selectedChoiceButton.style.color = '#FFFFFF'; // Set text color to white
+  
+      // Find the index of the correct answer and highlight it in green
+      const choices = document.querySelectorAll('#choices button');
+      const correctIndex = questions[currentQuestionIndex].choices.indexOf(answer);
+      choices[correctIndex].style.backgroundColor = '#00FF00'; // Set background color to green
+      choices[correctIndex].style.color = '#FFFFFF'; // Set text color to white
+  
+      // Disable all choice buttons temporarily to prevent further selection
+      choices.forEach((button) => {
+        button.disabled = true;
+      });
+  
       timeLeft -= 10; // Subtract 10 seconds from the timer
+  
+      setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          displayQuestion();
+        } else {
+          endQuiz();
+        }
+      }, 1000);
     }
-  }
+}
   
   // Function to end the quiz
   function endQuiz() {
