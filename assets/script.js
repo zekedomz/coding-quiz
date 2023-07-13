@@ -17,13 +17,23 @@ const questions = [
     },
     {
       question: "What is the purpose of JavaScript?",
-      choices: ["To style web pages", "To create web page layouts", "To add interactivity to web pages", "To define web page structure"],
+      choices: ["To add interactivity to web pages", "To style web pages", "To define web page structure", "To handle server-side operations"],
       answer: "To add interactivity to web pages"
     },
     {
       question: "What does CSS stand for?",
       choices: ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style Sheets", "Colorful Style Sheets"],
       answer: "Cascading Style Sheets"
+    },
+    {
+      question: "Which keyword is used to declare a variable in JavaScript?",
+      choices: ["var", "let", "const", "all of the above"],
+      answer: "all of the above"
+    },
+    {
+      question: "What is the purpose of the 'console.log()' function in JavaScript?",
+      choices: ["To display messages in the browser console", "To execute a function", "To manipulate the DOM", "To create an alert box"],
+      answer: "To display messages in the browser console"
     },
     // Add more coding-related questions...
   ];
@@ -78,7 +88,7 @@ const questions = [
     });
   }
   
-// Function to handle user's choice selection
+  // Function to handle user's choice selection
 function handleChoiceClick(choice, answer) {
     const selectedChoiceButton = event.target;
   
@@ -124,7 +134,7 @@ function handleChoiceClick(choice, answer) {
         }
       }, 1000);
     }
-}
+  }
   
   // Function to end the quiz
   function endQuiz() {
@@ -141,9 +151,6 @@ function handleChoiceClick(choice, answer) {
     timerElement.textContent = "";
     finalScoreElement.textContent = "Your final score: " + timeLeft;
     initialsContainer.style.display = "block";
-    
-    const saveButton = document.getElementById("save-button");
-    saveButton.addEventListener("click", saveScore);
   }
   
   // Function to save initials and score
@@ -175,4 +182,8 @@ function handleChoiceClick(choice, answer) {
   // Add event listener to the start button
   const startButton = document.getElementById("start-button");
   startButton.addEventListener("click", startQuiz);
+  
+  // Add event listener to the save button
+  const saveButton = document.getElementById("save-button");
+  saveButton.addEventListener("click", saveScore);
   
