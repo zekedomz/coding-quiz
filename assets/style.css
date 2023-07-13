@@ -4,76 +4,102 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-  }
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
   
-  .quiz-container h1 {
+.quiz-container h1 {
     font-size: 28px;
     margin-bottom: 20px;
-  }
+}
   
-  /* CSS styles for the question and choices */
-  #question {
+/* CSS styles for the question and choices */
+#question {
     font-size: 20px;
     margin-bottom: 20px;
-  }
+    text-align: left;
+}
   
-  #choices {
+#choices {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
   
-  #choices button {
+#choices button {
     padding: 10px 20px;
     margin-bottom: 10px;
     font-size: 16px;
     border-radius: 4px;
     border: none;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
+    color: #333333;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  #choices button:hover {
-    background-color: #e0e0e0;
-  }
+#choices button:hover {
+    background-color: #f2f2f2;
+}
   
-  /* CSS styles for the timer */
-  #timer {
+/* CSS styles for the timer */
+#timer {
     font-size: 18px;
     margin-bottom: 20px;
-  }
+}
   
-  /* CSS styles for the final score section */
-  #final-score {
+/* CSS styles for the final score section */
+#final-score {
     font-size: 24px;
     margin-bottom: 20px;
-  }
+}
   
-  /* CSS styles for the initials container */
-  #initials-container {
+/* CSS styles for the initials container */
+#initials-container {
     margin-top: 20px;
-  }
+}
   
-  #initials-input {
+#initials-input {
     padding: 10px;
     margin-right: 10px;
     font-size: 16px;
-  }
+}
   
-  #save-button {
+#save-button {
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 4px;
     border: none;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
+    color: #333333;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  #save-button:hover {
-    background-color: #e0e0e0;
-  }
+#save-button:hover {
+    background-color: #f2f2f2;
+}
   
-  /* Add any additional custom styles to fit your design */
+/* Additional styles specific to coding quiz */
+.quiz-container {
+    background-color: #f9f9f9;
+    padding: 40px;
+}
+  
+#start-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: none;
+    background-color: #ffffff;
+    color: #333333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+#start-button:hover {
+    background-color: #f2f2f2;
+}
+  
   
