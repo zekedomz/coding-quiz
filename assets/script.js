@@ -58,19 +58,39 @@ const questions = [
   }
   
   // Function to start the timer
-  function startTimer() {
-    const timerElement = document.getElementById("timer");
-    timerElement.textContent = timeLeft;
+function startTimer() {
+const timerElement = document.getElementById("timer");
     
-    timerInterval = setInterval(function() {
-      timeLeft--;
-      timerElement.textContent = timeLeft;
+// Format the initial time
+const formattedTime = formatTime(timeLeft);
+timerElement.textContent = "Time: " + formattedTime;
+    
+timerInterval = setInterval(function() {
+    timeLeft--;
       
-      if (timeLeft <= 0) {
+    // Format the time
+    const formattedTime = formatTime(timeLeft);
+    timerElement.textContent = "Time: " + formattedTime;
+      
+    if (timeLeft <= 0) {
         endQuiz();
-      }
+    }
     }, 1000);
   }
+  
+  // Function to format the time as "Time: HH:MM:SS"
+  function formatTime(time) {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    
+    const formattedHours = String(hours).padStart(2, "0");
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+    
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  }
+  
   
   // Function to display a question and its choices
   function displayQuestion() {
