@@ -1,16 +1,31 @@
-// Define your questions and answers as an array of objects
+// Define your coding-related questions and answers as an array of objects
 const questions = [
     {
-      question: "What is the capital of France?",
-      choices: ["Paris", "Berlin", "London", "Rome"],
-      answer: "Paris"
+      question: "What does HTML stand for?",
+      choices: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyperlinks and Text Manipulation Language"],
+      answer: "Hyper Text Markup Language"
     },
     {
-      question: "Who is the creator of JavaScript?",
-      choices: ["Brendan Eich", "Douglas Crockford", "Tim Berners-Lee", "Larry Page"],
-      answer: "Brendan Eich"
+      question: "What is the CSS box model used for?",
+      choices: ["Styling web page layouts", "Creating interactive web forms", "Manipulating web page content", "Executing JavaScript code"],
+      answer: "Styling web page layouts"
     },
-    // Add more questions...
+    {
+      question: "Which of the following is NOT a programming language?",
+      choices: ["Java", "Python", "HTML", "C++"],
+      answer: "HTML"
+    },
+    {
+      question: "What is the purpose of JavaScript?",
+      choices: ["To style web pages", "To create web page layouts", "To add interactivity to web pages", "To define web page structure"],
+      answer: "To add interactivity to web pages"
+    },
+    {
+      question: "What does CSS stand for?",
+      choices: ["Cascading Style Sheets", "Computer Style Sheets", "Creative Style Sheets", "Colorful Style Sheets"],
+      answer: "Cascading Style Sheets"
+    },
+    // Add more coding-related questions...
   ];
   
   let currentQuestionIndex = 0;
